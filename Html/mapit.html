@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Civic App: Have Your Say!!!</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<style type="text/css">
+#containingBlock {
+    width: 70%;
+    height: 70%;
+
+}
+.videoWrapper {
+    position: relative;
+    align-content: center;
+    padding-bottom: 50%;
+    padding-top: 25px;
+    height: 0;
+}
+* html .videoWrapper {
+  margin-bottom: 60px;
+  margin-bot\tom: 0;
+}
+.videoWrapper div,
+.videoWrapper object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+</head>
+<body>
+<nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Your Community</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html" target="_blank">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="active"><a href="mapit.html">MapIt</a></li>
+                <li><a href="share.html">Share</a></li>
+                <li><a href="greatplaces.html">GreatPlaces</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="jumbotron">
+    <h2 >Map It: Where are your Great Places? <br> What would you like to see Here?</h2>
+    <br>
+    <br>
+
+     <div id="map" style="height: 550px; width: 800px"></div>
+
+    <script>
+        var map = L.map('map').setView([48.4209650, -123.37332], 14);
+        // this access token was borrowed from the Leaflet example! :)
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'mapbox.streets'
+        }).addTo(map);
+        //a transient way of conveying info, with a "popup"
+        var popup = L.popup();
+        //this function is "called" when a user clicks on the map
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("This is your location" + "<br>" + e.latlng.toString() + "<br>" +  "<br>" + "What would you like to happen here?" + "<form id='form' onsubmit='return false;''> <input type='text' id='content' /> <input type='submit' onclick='alert(content.value);' />  </form>" +  "<br>" + "Victoria Water Front<img src='http://www.modelships.de/Museums_and_replicas/Maritime-Museum-Victoria/gIMG_0547.jpg' height=210 width= 282>")
+                .openOn(map);
+        }
+        map.on('click', onMapClick);
+    </script>
+    </div>
+   
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <footer>
+                <p align="center">Thank You for Being Part of the Solution</p>
+            </footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>                                     
